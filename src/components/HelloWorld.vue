@@ -2,7 +2,8 @@
   <div>
     <el-table
       :data="coinTable"
-      style="width: 100%">
+      style="width: 100%"
+      :row-class-name="tableRowClassName">
       <el-table-column header-align="center"
                        prop="platform"
                        label="交易所"
@@ -24,6 +25,16 @@
     </el-table>
   </div>
 </template>
+<style>
+  .el-table .warning-row {
+    background: #f0f9eb;
+  }
+
+  .el-table .success-row {
+    background: oldlace;
+  }
+</style>
+
 <script>
   export default {
     data() {
@@ -35,6 +46,13 @@
       this.getData();
     },
     methods: {
+      tableRowClassName({row, rowIndex}) {
+        if (row.range>0) {
+          return 'warning-row';
+        } else  {
+          return 'success-row';
+        }
+      },
       getData() {
         this.search();
       },
